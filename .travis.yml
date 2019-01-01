@@ -2,16 +2,16 @@ language: c
 compiler:
 - gcc
 script:
- - ./build.sh
+- "./build.sh"
 deploy:
- provider: s3
- access_key_id: AKIAJVRA3ZY4G2FZK4LQ
- secret_access_key:
-  secure: ZScZvbm4kfnXXoSZ85lhEs+rBBqjcQftishos+dV664IRi/5bQGdvVxPSOMhQ+3He7mNR5pzQxQbIlN0xww0dZRInY2Z1Lb6mx7XatLp/xVotXQKoid+bD3NG7CbcmQsTzu4RmO7SVUbVaJgS5H/qk5VdN2qXcxjyfB+Ul+RU+LuPm5SRH12WI/v0kiFe+AruE265Z0xCmo5IEtFgfMUyEK8VzTQSrYijRFgteYBjITkplDHd6/0MjN5s5cIMHFdcIVyDdFOlk1LUTIalxvHnGN3Ojn5QQIps997ROVuEvGEDDyA7wxC74sX6Txd2nrqZpvXhLz53W5NzkR1MJtB11Xwdns6K+7/+eErtx5ucwpu6Gvf71U8MaAaZ4kV2amVTkD89tAAsp8OO1gz+h57IDHwua8ffh7VS4L+4KPz7a/gVpVqyo+scusBAV3USpt7OQ+j5XughGUHNZwoKUkjMes08rh4vGxWsci6Y/8duzPY3OfmfFbtL4Z++nc6PPC2KwcVuACJf1s6Kbp5CElG0iJEzbt8jgkhXxcrkt+cCsu//dNdsb707BxODs/i/5OhUnB07ZOfEsyofZ89wGay3rPDx6eRm1vyGrnZ8nlwZIUu6dJVDz7+mL+z0Psp8FMlwMSZc6ZAX9QIrbLCTqEWG1hKeYDkUmCLcdi/rPOSjw0=
- skip_cleanup: true
- bucket: ota.clockwise.ee
- acl: public_read
- region: "us-west-2"
- local_dir: dist
- on:
-  repo: 2ndalpha/mqtt-h801-light
+  provider: s3
+  access_key_id: AKIAIFA6CFFPLWRUO2OQ
+  secret_access_key:
+    secure: z8E6U7YggjC/c6GlAhT8Zbybb78AC2fKhgNRNN1+kQ0/NNtVHCCeJSq2O0OOhkGcZkM34wgpubGk+BkENrFNvXigxcINEZaBAVKO05MI4mkA/4n+Kc/NXlt2deaB96PwtmGNBo3WgqMq9m5I1BDgxNcruqOpC+LEHMcAl1qoJCMh3MK/2+BdC/ng7CdArHzO2QgJVRBZVY4niIwigrBPCTRHcy6pJdxjGi4CkIYt+3B3s1KQBKVY7waGjMb1tg6oKxnpo5AU2197XFrxWnv8VEgTEWGtQn3imDS2CESJ7+Wgdyj8N08Z2R8Ut9+DNYHWpVPOsGSZW882UyRqTCCiALavN36Ob8yBljg8TwK5b6GsWONckbXBEVJEgpGQWHyoW5FmQO3sT+v/UJeA0R6vTuwyh3xTVdkFGVoOREQ7YPY/rVHKr7vxZwUkhMJYbQR+E0MBNpFDS8Z8GQL6jEAndWoLmEKy9pEjL/8FH4y5Hmt4P4R9GiwlTNqhy/oU8d2UFRA1NyxQ08VmZqqu6cZxwrJUA6QM5URH05qj/tnk50sSQfbSETQelALSef5GaAKP1M3cg9jiakgX2wvDegmiJsTfu3H9Bw/CtzjlP4gKZ2+LwV4iryfrNe3atchlej6hgiTeDpkPeVz02IOEPIk7uV3RF58Jx7qSrC8Y0VIWgmQ=
+  skip_cleanup: true
+  bucket: ota.clockwise.ee
+  acl: public_read
+  region: us-west-2
+  local_dir: dist
+  on:
+    repo: 2ndalpha/mqtt-h801-light
