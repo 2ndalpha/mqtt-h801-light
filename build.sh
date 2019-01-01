@@ -25,6 +25,8 @@ then
     echo "#define WIFI_PASS \"$wifi_password\"" >> default_settings.h
     echo "#define MQTT_SERVER \"$mqtt_server\"" >> default_settings.h
     echo "#define MQTT_TOPIC \"$mqtt_topic\"" >> default_settings.h
+else
+    echo "" > default_settings.h
 fi
 
 VERSION=$(git log --pretty=format:%h -n 1)
