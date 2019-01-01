@@ -24,8 +24,8 @@
 
 #define CONNECTION_CHECK_INTERVAL 10 // In seconds
 
-extern "C" { 
-  #include "user_interface.h" 
+extern "C" {
+  #include "user_interface.h"
 }
 
 WiFiClient wifiClient;
@@ -61,7 +61,7 @@ void setup() {
   white.setup();
   white2.setup();
 
-  pinMode(GREEN_LEDPIN, OUTPUT);  
+  pinMode(GREEN_LEDPIN, OUTPUT);
   pinMode(RED_LEDPIN, OUTPUT);
 
   digitalWrite(RED_LEDPIN, HIGH);
@@ -104,13 +104,14 @@ void loop() {
 bool connectToWifi() {
   Serial1.println("Connecting to Wifi");
   int retries = 10;
+  WiFi.mode(WIFI_STA);
   WiFi.begin(settings->getWifiSSID().c_str(), settings->getWifiPassword().c_str());
   while ((WiFi.status() != WL_CONNECTED) && retries--) {
     delay(500);
     Serial1.print(" .");
   }
 
-  if (WiFi.status() == WL_CONNECTED) { 
+  if (WiFi.status() == WL_CONNECTED) {
     Serial1.print("IP address: ");
     Serial1.println(WiFi.localIP());
     return true;
