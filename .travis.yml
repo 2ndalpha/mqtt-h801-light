@@ -3,3 +3,15 @@ compiler:
 - gcc
 script:
  - ./build.sh
+deploy:
+ provider: s3
+ access_key_id: AKIAJVRA3ZY4G2FZK4LQ
+ secret_access_key:
+  secure: ZScZvbm4kfnXXoSZ85lhEs+rBBqjcQftishos+dV664IRi/5bQGdvVxPSOMhQ+3He7mNR5pzQxQbIlN0xww0dZRInY2Z1Lb6mx7XatLp/xVotXQKoid+bD3NG7CbcmQsTzu4RmO7SVUbVaJgS5H/qk5VdN2qXcxjyfB+Ul+RU+LuPm5SRH12WI/v0kiFe+AruE265Z0xCmo5IEtFgfMUyEK8VzTQSrYijRFgteYBjITkplDHd6/0MjN5s5cIMHFdcIVyDdFOlk1LUTIalxvHnGN3Ojn5QQIps997ROVuEvGEDDyA7wxC74sX6Txd2nrqZpvXhLz53W5NzkR1MJtB11Xwdns6K+7/+eErtx5ucwpu6Gvf71U8MaAaZ4kV2amVTkD89tAAsp8OO1gz+h57IDHwua8ffh7VS4L+4KPz7a/gVpVqyo+scusBAV3USpt7OQ+j5XughGUHNZwoKUkjMes08rh4vGxWsci6Y/8duzPY3OfmfFbtL4Z++nc6PPC2KwcVuACJf1s6Kbp5CElG0iJEzbt8jgkhXxcrkt+cCsu//dNdsb707BxODs/i/5OhUnB07ZOfEsyofZ89wGay3rPDx6eRm1vyGrnZ8nlwZIUu6dJVDz7+mL+z0Psp8FMlwMSZc6ZAX9QIrbLCTqEWG1hKeYDkUmCLcdi/rPOSjw0=
+ skip_cleanup: true
+ bucket: ota.clockwise.ee
+ acl: public_read
+ region: "us-west-2"
+ local_dir: dist
+ on:
+  repo: 2ndalpha/mqtt-h801-light

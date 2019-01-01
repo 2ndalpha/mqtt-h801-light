@@ -25,6 +25,8 @@ then
     echo "#define WIFI_PASS \"$wifi_password\"" >> default_settings.h
     echo "#define MQTT_SERVER \"$mqtt_server\"" >> default_settings.h
     echo "#define MQTT_TOPIC \"$mqtt_topic\"" >> default_settings.h
+else
+    echo "" > default_settings.h
 fi
 
 VERSION=$(git log --pretty=format:%h -n 1)
@@ -111,4 +113,4 @@ if [[ ! -e "dist" ]]
 then
     mkdir dist
 fi
-cp /tmp/mkESP/mqtt-sh801_generic/mqtt-h801.bin dist/MQTT-H801.bin
+cp /tmp/mkESP/mqtt-h801_generic/mqtt-h801.bin dist/MQTT-H801.bin
