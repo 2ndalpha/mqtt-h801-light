@@ -113,5 +113,5 @@ if [[ ! -e "dist" ]]
 then
     mkdir dist
 fi
-ls -alh /tmp/mkESP/
-cp /tmp/mkESP/mqtt-sh801_generic/mqtt-h801.bin dist/MQTT-H801.bin
+ls -alh /tmp/mkESP/mqtt-h801_generic/
+cp /tmp/mkESP/mqtt-h801_generic/mqtt-h801.bin dist/MQTT-H801.bin
