@@ -1,12 +1,12 @@
 #!/bin/bash
 set -e
 
-if [ ! $FLASH_SIZE ]
+if [[ ! $FLASH_SIZE ]]
 then
     FLASH_SIZE=1M64
 fi
 
-if [ ! -e "default_settings.h" ] && [ $(uname) == 'Darwin' ]
+if [[ ! -e "default_settings.h" ]] && [[ $(uname) == 'Darwin' ]]
 then
     printf "Name: "
     read name
@@ -33,7 +33,7 @@ echo "#define VERSION \"$VERSION\"" > version.h
 ARDUINO_IDE_VERSION=1.6.9
 BUILD_DIR="build"
 
-if [ $(uname) == 'Darwin' ]
+if [[ $(uname) == 'Darwin' ]]
 then
     PLATFORM='macosx'
     FILE_EXT='zip'
@@ -44,18 +44,18 @@ else
     ARDUINO_DIR="arduino-$ARDUINO_IDE_VERSION"
 fi
 
-if [ ! -e "$BUILD_DIR" ]
+if [[ ! -e "$BUILD_DIR" ]]
 then
     mkdir $BUILD_DIR
 fi
 cd $BUILD_DIR
 
-if [ ! -e "$ARDUINO_DIR" ]
+if [[ ! -e "$ARDUINO_DIR" ]]
 then
     ARDUINO_FILE=arduino-${ARDUINO_IDE_VERSION}-$PLATFORM.$FILE_EXT
     wget -O $ARDUINO_FILE http://arduino.cc/download.php?f=/$ARDUINO_FILE
 
-    if [ $FILE_EXT == 'zip' ]
+    if [ ${FILE_EXT} == 'zip' ]
     then
         unzip $ARDUINO_FILE
     else
@@ -65,7 +65,7 @@ then
     rm -f $ARDUINO_FILE
 fi
 
-if [ ! -e "esp8266" ]
+if [[ ! -e "esp8266" ]]
 then
     git clone https://github.com/esp8266/Arduino.git
     mv Arduino esp8266
@@ -74,7 +74,7 @@ then
     cd ../../
 fi
 
-if [ ! -e "makeEspArduino" ]
+if [[ ! -e "makeEspArduino" ]]
 then
     git clone https://github.com/plerup/makeEspArduino.git
 fi
@@ -82,7 +82,7 @@ fi
 export ESP_ROOT=$(pwd)/esp8266
 export SINGLE_THREAD=1
 
-if [ ! -e "pubsubclient" ]
+if [[ ! -e "pubsubclient" ]]
 then
 git clone https://github.com/Imroy/pubsubclient
 cp pubsubclient/src/* makeEspArduino/
@@ -97,7 +97,7 @@ export FLASH_DEF=$FLASH_SIZE
 
 cp ../../*.ino ../../*.h ../../*.cpp .
 
-if [ $(uname) == 'Darwin' ]
+if [[ $(uname) == 'Darwin' ]]
 then
     make -f makeEspArduino.mk upload
     screen $UPLOAD_PORT 115200
@@ -107,7 +107,7 @@ fi
 
 
 cd ../../
-if [ ! -e "dist" ]
+if [[ ! -e "dist" ]]
 then
     mkdir dist
 fi
