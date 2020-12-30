@@ -70,6 +70,9 @@ fi
 if [[ ! -e "esp8266" ]]
 then
     git clone https://github.com/esp8266/Arduino.git
+    cd Arduino
+    git checkout tags/2.4.2
+    cd ..
     mv Arduino esp8266
     cd esp8266/tools
     python get.py
