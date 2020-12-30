@@ -6,27 +6,30 @@ then
     FLASH_SIZE=1M64
 fi
 
-if [[ ! -e "default_settings.h" ]] && [[ $(uname) == 'Darwin' ]]
+if [[ ! -e "default_settings.h" ]]
 then
-    printf "Name: "
-    read name
-    printf "Wifi SSID: "
-    read wifi_ssid
-    printf "Wifi password: "
-    read wifi_password
-    printf "MQTT server: "
-    read mqtt_server
-    printf "MQTT topic: "
-    read mqtt_topic
+    if [[ $(uname) == 'Darwin' ]]
+    then
+        printf "Name: "
+        read name
+        printf "Wifi SSID: "
+        read wifi_ssid
+        printf "Wifi password: "
+        read wifi_password
+        printf "MQTT server: "
+        read mqtt_server
+        printf "MQTT topic: "
+        read mqtt_topic
 
-    echo "#define DEFAULT_SETTINGS" > default_settings.h
-    echo "#define NAME \"$name\"" >> default_settings.h
-    echo "#define WIFI_SSID \"$wifi_ssid\"" >> default_settings.h
-    echo "#define WIFI_PASS \"$wifi_password\"" >> default_settings.h
-    echo "#define MQTT_SERVER \"$mqtt_server\"" >> default_settings.h
-    echo "#define MQTT_TOPIC \"$mqtt_topic\"" >> default_settings.h
-else
-    echo "" > default_settings.h
+        echo "#define DEFAULT_SETTINGS" > default_settings.h
+        echo "#define NAME \"$name\"" >> default_settings.h
+        echo "#define WIFI_SSID \"$wifi_ssid\"" >> default_settings.h
+        echo "#define WIFI_PASS \"$wifi_password\"" >> default_settings.h
+        echo "#define MQTT_SERVER \"$mqtt_server\"" >> default_settings.h
+        echo "#define MQTT_TOPIC \"$mqtt_topic\"" >> default_settings.h
+    else
+        echo "" > default_settings.h
+    fi
 fi
 
 VERSION=$(git log --pretty=format:%h -n 1)
