@@ -91,6 +91,7 @@ then
 fi
 
 ESP_ROOT=$(pwd)/esp8266
+export ESP_ROOT
 export SINGLE_THREAD=1
 
 if [[ ! -e "pubsubclient" ]]
