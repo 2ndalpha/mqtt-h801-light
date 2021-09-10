@@ -22,7 +22,7 @@ Webserver::Webserver(Settings* settings) {
     html += "</head><body>";
     html += "<div class=\"container\"><div class=\"starter-template\">";
     html += "<h1>" + this->settings->getName() + "</h1>";
-    html += "<p class=\"lead\">Version: <a target=\"_blank\" href=\"https://github.com/2ndalpha/mqtt-switch/commit/" + String(VERSION) + "\">" + String(VERSION) + "</a><br/>";
+    html += "<p class=\"lead\">Version: <a target=\"_blank\" href=\"https://github.com/2ndalpha/mqtt-h801-light/commit/" + String(VERSION) + "\">" + String(VERSION) + "</a><br/>";
     html += "Built: " + String(compile_date) + "<br/>";
     html += "Uptime: " + uptime() + "</p>";
     html += "<p class=\"lead\">MQTT Server: " + this->settings->getMQTTServer() + "<br/>";
@@ -36,7 +36,7 @@ Webserver::Webserver(Settings* settings) {
   server->on("/ota", [&](){
     Serial1.println("Commence OTA");
     this->server->sendHeader("Location", "/", true);
-    this->server->send ( 302, "text/plain", "");
+    this->server->send(302, "text/plain", "");
     ESPhttpUpdate.update("ota.clockwise.ee", 80, "/MQTT-H801.bin");
   });
 

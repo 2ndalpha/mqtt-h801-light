@@ -1,6 +1,9 @@
 name: Deploy
 
-on: pull_request
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   deploy:
