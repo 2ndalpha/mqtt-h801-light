@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.3.4
+
+    - name: Build
+      run: ./build.sh
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.DEPLOY_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.DEPLOY_AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-west-2
+
+    - name: Copy to S3
+      run: aws s3 cp dist/MQTT-H801.bin s3://ota.clockwise.ee/MQTT-H801.bin
