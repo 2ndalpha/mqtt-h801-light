@@ -22,4 +22,4 @@ jobs:
         aws-region: us-west-2
 
     - name: Copy to S3
-      run: aws s3 cp dist/MQTT-H801.bin s3://ota.clockwise.ee/MQTT-H801.bin
+      run: aws s3 cp dist/MQTT-H801.bin s3://ota.clockwise.ee/MQTT-H801.bin --acl public-read
