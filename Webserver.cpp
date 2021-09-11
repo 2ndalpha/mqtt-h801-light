@@ -19,18 +19,28 @@ Webserver::Webserver(Settings* settings) {
     String html = "<html><head><title>" + this->settings->getName() + "</title>";
     html += "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" crossorigin=\"anonymous\">";
     html += "<link href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css\" rel=\"stylesheet\" />";
+    html += "<script type=\"text/javascript\" src=\"script.js\"></script>";
     html += "</head><body>";
     html += "<div class=\"container\"><div class=\"starter-template\">";
     html += "<h1>" + this->settings->getName() + "</h1>";
     html += "<p class=\"lead\">Version: <a target=\"_blank\" href=\"https://github.com/2ndalpha/mqtt-h801-light/commit/" + String(VERSION) + "\">" + String(VERSION) + "</a><br/>";
     html += "Built: " + String(compile_date) + "<br/>";
     html += "Uptime: " + uptime() + "</p>";
-    html += "<p class=\"lead\">MQTT Server: " + this->settings->getMQTTServer() + "<br/>";
+    html += "<p class=\"lead\">MQTT Server: " + this->settings->getMQTTServer() + " <a href=\"#\" class=\"btn btn-default btn-sm\" onclick=\"return editServer('" + this->settings->getMQTTServer() + "')\">Edit</a><br/>";
     html += "MQTT Topic: " + this->settings->getMQTTTopic() + "<br/>";
-    html += "<p><a href=\"ota\" class=\"btn btn-primary\"><i class=\"fa fa-refresh\" aria-hidden=\"true\"></i> Upgrade</a></p>";
+    html += "<p><a href=\"ota\" class=\"btn btn-primary\"><i class=\"fa fa-refresh\"></i> Upgrade</a></p>";
     html += "</div></div></body></html>";
     
     this->server->send(200, "text/html", html);
+  });
+
+  server->on("/script.js", [&](){
+    String js = "function editServer(address) {";
+          js += "var newAddress = prompt('Enter address', address);";
+          js += "return false;";
+          js += "}";
+
+    this->server->send(200, "text/javascript", js);
   });
 
   server->on("/ota", [&](){
