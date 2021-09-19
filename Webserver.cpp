@@ -26,7 +26,7 @@ Webserver::Webserver(Settings* settings) {
     html += "<p class=\"lead\">Version: <a target=\"_blank\" href=\"https://github.com/2ndalpha/mqtt-h801-light/commit/" + String(VERSION) + "\">" + String(VERSION) + "</a><br/>";
     html += "Built: " + String(compile_date) + "<br/>";
     html += "Uptime: " + uptime() + "</p>";
-    html += "<p class=\"lead\">MQTT Server: " + this->settings->getMQTTServer() + " <a href=\"#\" class=\"btn btn-default btn-sm\" onclick=\"return editServer('" + this->settings->getMQTTServer() + "')\">Edit</a><br/>";
+    html += "<p class=\"lead\">MQTT Server: " + this->settings->getMQTTServer() + " <a href=\"#\" class=\"btn btn-default btn-sm\" onclick=\"editServer('" + this->settings->getMQTTServer() + "')\">Edit</a><br/>";
     html += "MQTT Topic: " + this->settings->getMQTTTopic() + "<br/>";
     html += "<p><a href=\"ota\" class=\"btn btn-primary\"><i class=\"fa fa-refresh\"></i> Upgrade</a></p>";
     html += "</div></div></body></html>";
@@ -35,9 +35,16 @@ Webserver::Webserver(Settings* settings) {
   });
 
   server->on("/script.js", [&](){
-    String js = "function editServer(address) {";
+    String js = "async function editServer(address) {";
           js += "var newAddress = prompt('Enter address', address);";
-          js += "return false;";
+          js += "await fetch('/mqtt-server', {";
+          js += "method: 'POST',";
+          js += "headers: {";
+          js += "'Content-Type': 'application/x-www-form-urlencoded'";
+          js += "},";
+          js += "body: 'server='+newAddress";
+          js += "})";
+          js += "location.reload();";
           js += "}";
 
     this->server->send(200, "text/javascript", js);
