@@ -51,9 +51,9 @@ Webserver::Webserver(Settings* settings) {
   });
 
   server->on("/mqtt-server", [&](){
-    if (server.hasArgs("server")) {
-      this->settings->setMQTTServer(server.args("server"));
-      this->settings-save();
+    if (server->hasArg("server")) {
+      this->settings->setMQTTServer(server->arg("server"));
+      this->settings->save();
       this->server->send(200, "text/plain", "");
     }
     this->server->send(400, "text/plain", "");
