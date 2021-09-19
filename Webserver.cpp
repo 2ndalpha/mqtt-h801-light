@@ -43,8 +43,8 @@ Webserver::Webserver(Settings* settings) {
           js += "'Content-Type': 'application/x-www-form-urlencoded'";
           js += "},";
           js += "body: 'server='+newAddress";
-          js += "})";
-          js += "location.reload();";
+          js += "});";
+          js += "window.location.reload();";
           js += "}";
 
     this->server->send(200, "text/javascript", js);
