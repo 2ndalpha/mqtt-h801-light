@@ -50,6 +50,15 @@ Webserver::Webserver(Settings* settings) {
     this->server->send(200, "text/javascript", js);
   });
 
+  server->on("/mqtt-server", [&](){
+    if (server.hasArgs("server")) {
+      this->settings->setMQTTServer(server.args("server"));
+      this->settings-save();
+      this->server->send(200, "text/plain", "");
+    }
+    this->server->send(400, "text/plain", "");
+  });
+
   server->on("/ota", [&](){
     Serial1.println("Commence OTA");
     this->server->sendHeader("Location", "/", true);
